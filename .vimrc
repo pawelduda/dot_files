@@ -1,3 +1,6 @@
+set shell=/bin/sh
+let macvim_skip_colorscheme=1
+
 set number
 set linebreak
 set showbreak=+++
@@ -24,8 +27,9 @@ set backspace=indent,eol,start
 
 set nocompatible
 
-syntax enable
+syntax on
 set background=dark
+let g:solarized_termtrans=1
 colorscheme solarized
 
 filetype off
@@ -49,7 +53,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-ruby/vim-ruby'
 
 call vundle#end()
-syntax on
 filetype plugin indent on
 
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
