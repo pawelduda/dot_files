@@ -35,6 +35,11 @@ set ruler
 set undolevels=100
 set backspace=indent,eol,start
 
+"Swap files
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
 syntax on
 set background=dark
 let g:solarized_termtrans=1
