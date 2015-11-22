@@ -68,6 +68,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'ervandew/supertab'
 Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'terryma/vim-expand-region'
+Plugin 'terryma/vim-multiple-cursors'
 
 "Language/tool specific
 Plugin 'vim-ruby/vim-ruby'
