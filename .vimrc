@@ -71,6 +71,7 @@ Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'terryma/vim-expand-region'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'szw/vim-maximizer'
 
 "Language/tool specific
 Plugin 'vim-ruby/vim-ruby'
@@ -125,6 +126,11 @@ map <Leader>a :call RunAllSpecs()<CR>
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
+"Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 "vim-repeat support
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
@@ -132,3 +138,6 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 "airline fixes
 set fillchars+=stl:\ ,stlnc:\
 let &t_Co=256
+
+"vim-maximizer
+let g:maximizer_default_mapping_key = '<F5>'
