@@ -9,7 +9,7 @@ set nocompatible
 set timeoutlen=500
 set number
 set linebreak
-set showbreak=+++
+set showbreak=>>>
 set textwidth=120
 set noshowmatch
 "No beep or flash
