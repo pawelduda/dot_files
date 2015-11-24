@@ -11,8 +11,9 @@ set number
 set linebreak
 set showbreak=+++
 set textwidth=120
-set showmatch
-set visualbell
+set noshowmatch
+"No beep or flash
+autocmd VimEnter * set vb t_vb=
 set hidden
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,
 set laststatus=2
@@ -27,6 +28,7 @@ set smartcase
 set ignorecase
 set incsearch
 
+"Indentantion
 set autoindent
 set expandtab
 set shiftwidth=4
@@ -38,7 +40,7 @@ set softtabstop=4
 set ruler
 set colorcolumn=120
 
-set undolevels=100
+set undolevels=200
 set backspace=indent,eol,start
 
 syntax on
@@ -47,14 +49,13 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 filetype off
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'xolox/vim-misc'
-Plugin 'easymotion/vim-easymotion'
 Plugin 'xolox/vim-easytags'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
@@ -85,9 +86,11 @@ Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rvm'
 Plugin 'thoughtbot/vim-rspec'
+Plugin 'ngmy/vim-rubocop'
 
 call vundle#end()
 filetype plugin indent on
+
 set omnifunc=syntaxcomplete#Complete
 
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
@@ -107,12 +110,12 @@ nnoremap ; :
 
 "Bubble single lines (kicks butt)
 "http://vimcasts.org/episodes/bubbling-text/
-nmap <C-j> ddkP
-nmap <C-k> ddp
+nmap <C-j> ddp
+nmap <C-k> ddkP
 
 "Bubble multiple lines
-vmap <C-j> xkP`[V`]
-vmap <C-k> xp`[V`]
+vmap <C-j> xp`[V`]
+vmap <C-k> xkP`[V`]
 
 "Easymotion
 map <Leader> <Plug>(easymotion-prefix)
@@ -132,12 +135,9 @@ if executable('ag')
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-"vim-repeat support
-silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
-
 "airline fixes
 set fillchars+=stl:\ ,stlnc:\
 let &t_Co=256
 
 "vim-maximizer
-let g:maximizer_default_mapping_key = '<F5>'
+" let g:maximizer_default_mapping_key = '<F5>'
