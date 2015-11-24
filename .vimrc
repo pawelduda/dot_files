@@ -17,6 +17,10 @@ set hidden
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,
 set laststatus=2
 
+"Encoding
+set encoding=utf-8
+set fileencoding=utf-8
+
 "Search
 set hlsearch
 set smartcase
@@ -30,15 +34,12 @@ set smartindent
 set smarttab
 set softtabstop=4
 
+"Ruler
 set ruler
+set colorcolumn=120
 
 set undolevels=100
 set backspace=indent,eol,start
-
-"Swap files
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
 
 syntax on
 set background=dark
