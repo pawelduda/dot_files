@@ -25,7 +25,8 @@ set hidden
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,
 set laststatus=2
 
-"Encoding
+"Encoding, language
+set langmenu=en_US.UTF-8
 set encoding=utf-8
 set fileencoding=utf-8
 
@@ -94,6 +95,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rvm'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'ngmy/vim-rubocop'
+Plugin 'lmeijvogel/vim-yaml-helper'
 
 call vundle#end()
 filetype plugin indent on
@@ -157,5 +159,6 @@ let &t_Co=256
 "vim-maximizer
 " let g:maximizer_default_mapping_key = '<F5>'
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind \ (backward slash) to grep shortcut
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
