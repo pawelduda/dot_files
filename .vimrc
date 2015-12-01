@@ -109,8 +109,6 @@ autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype sass setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
-autocmd BufWritePost * exe ":UpdateTags"
-
 "Map leader to ,
 let mapleader = ","
 
@@ -128,6 +126,9 @@ vmap <C-k> xkP`[V`]
 
 "Easymotion
 map <Leader> <Plug>(easymotion-prefix)
+
+"Async easytags
+let g:easytags_async = 1
 
 "Rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
