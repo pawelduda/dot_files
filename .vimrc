@@ -25,6 +25,9 @@ set hidden
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,
 set laststatus=2
 
+"Disable swap files creation
+set noswapfile
+
 "Encoding, language
 set langmenu=en_US.UTF-8
 set encoding=utf-8
@@ -68,14 +71,14 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'sjl/gundo.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'szw/vim-g'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
-Plugin 'ervandew/supertab'
 Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'terryma/vim-expand-region'
@@ -139,6 +142,7 @@ map <Leader>a :call RunAllSpecs()<CR>
 "CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
+map <C-l> :CtrlPMRU<CR>
 "Speed fixes http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " The Silver Searcher
@@ -163,3 +167,6 @@ let &t_Co=256
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
+
+"Gundo mapping
+nnoremap <F5> :GundoToggle<CR>
