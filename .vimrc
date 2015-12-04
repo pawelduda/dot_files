@@ -170,3 +170,6 @@ nnoremap \ :Ag<SPACE>
 
 "Gundo mapping
 nnoremap <F5> :GundoToggle<CR>
+
+"YCM speed fixes
+let g:ycm_register_as_syntastic_checker = 0
