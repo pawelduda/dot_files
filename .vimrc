@@ -6,6 +6,10 @@ let macvim_skip_colorscheme=1
 
 set nocompatible
 
+"GUI settings
+set gfn=Monaco\ 14
+set guioptions-=T
+
 "Mouse support
 set mouse=a
 
@@ -55,9 +59,6 @@ set undolevels=200
 set backspace=indent,eol,start
 
 syntax on
-set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -72,7 +73,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'sjl/gundo.vim'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
+Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'scrooloose/syntastic'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'
@@ -99,9 +101,16 @@ Plugin 'tpope/vim-rvm'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'lmeijvogel/vim-yaml-helper'
+Plugin 'isRuslan/vim-es6'
 
 call vundle#end()
 filetype plugin indent on
+
+set background=dark
+set t_Co=256
+colorscheme PaperColor
+" let g:solarized_termtrans=1
+" colorscheme solarized
 
 set omnifunc=syntaxcomplete#Complete
 
