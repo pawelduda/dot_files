@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode git rvm rake ruby rails)
+plugins=(vi-mode colored-man-pages git rvm rake ruby rails)
 
 # User configuration
 
@@ -92,3 +92,5 @@ export KEYTIMEOUT=1
 PS1="\$(~/.rvm/bin/rvm-prompt) $PS1"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+eval $(thefuck --alias)
+eval $(thefuck --alias kurde)
