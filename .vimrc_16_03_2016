@@ -6,6 +6,12 @@ let macvim_skip_colorscheme=1
 
 set nocompatible
 
+"GUI settings
+set gfn=Monaco\ 12
+set guioptions-=T
+set guiheadroom=0
+set guioptions-=e
+
 "Mouse support
 set mouse=a
 
@@ -19,6 +25,7 @@ set linebreak
 set showbreak=>>>
 set textwidth=120
 set noshowmatch
+
 "No beep or flash
 autocmd VimEnter * set vb t_vb=
 set hidden
@@ -66,18 +73,22 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'sjl/gundo.vim'
+Plugin 'NLKNguyen/papercolor-theme'
+
 Plugin 'scrooloose/syntastic'
+
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
-" Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'terryma/vim-expand-region'
-" Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'szw/vim-maximizer'
-Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'szw/vim-maximizer'
+Plugin 'lambdalisue/vim-fullscreen'
 
 "Language/tool specific
 Plugin 'vim-ruby/vim-ruby'
@@ -85,22 +96,26 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-haml'
+Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-rvm'
-" Plugin 'thoughtbot/vim-rspec'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'lmeijvogel/vim-yaml-helper'
+Plugin 'isRuslan/vim-es6'
+Plugin 'mattboehm/vim-unstack'
+Plugin 'mattboehm/vim-accordion'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'mattn/emmet-vim'
 
 call vundle#end()
 filetype plugin indent on
 
-syntax on
 set background=dark
 set t_Co=256
-" let g:solarized_termtrans=1
 colorscheme PaperColor
 
 set omnifunc=syntaxcomplete#Complete
@@ -110,7 +125,7 @@ autocmd Filetype haml setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype sass setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 "Map leader to ,
 let mapleader = ","
@@ -118,22 +133,15 @@ let mapleader = ","
 "Use commands like this: ;w instead of :w
 nnoremap ; :
 
-"Bubble single lines (kicks butt)
-"http://vimcasts.org/episodes/bubbling-text/
-nmap <C-j> ddp
-nmap <C-k> ddkP
-
-"Bubble multiple lines
-vmap <C-j> xp`[V`]
-vmap <C-k> xkP`[V`]
-
 "Easymotion
 map <Leader> <Plug>(easymotion-prefix)
 
+"Easytags
 "Async easytags
 let g:easytags_async = 1
-"Better performance
-let g:easytags_syntax_keyword = 'always'
+"Create tags files per working directory
+" let g:easytags_dynamic_files = 2
+" set cpoptions+=d
 
 "Rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -170,37 +178,33 @@ let &t_Co=256
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
-"YCM speed fixes
-let g:ycm_register_as_syntastic_checker = 0
+"Gundo mapping
+nnoremap <F5> :GundoToggle<CR>
 
-set ttimeoutlen=50
+"YCM speed fixes - uncomment line below in case of performance issues
+" let g:ycm_register_as_syntastic_checker = 0
+
+let g:syntastic_javascript_checkers = ['standard']"
+
+"NERDTree shortcut ,2
+nmap <leader>2 <C-n> :NERDTreeToggle<CR>
 
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window. Protect against
 " screwing up folding when switching between windows.
-autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-
-"Disable Airline extensions for speed
-let g:airline_extensions=[]
-
-"NERDTree hotkey
-nmap <leader>2 :NERDTreeToggle<cr>
-
-" Disable hover tooltips
-set noballooneval
-let g:netrw_nobeval = 1
+" Uncomment line below in case of performance issues
+" autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+" autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_server_log_level = 'debug'
-
 "Gitgutter
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
+"Uncomment two lines below in case of performance issues
+" let g:gitgutter_realtime = 0
+" let g:gitgutter_eager = 0
 let g:gitgutter_grep_command = 'ag %s -l --nocolor -g ""'
 
+"I believe these settings (especially re=1) solved slow performance in mvim, I believe
 set nocursorcolumn
 set nocursorline
 set norelativenumber
