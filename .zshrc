@@ -51,11 +51,11 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode colored-man-pages git rvm rake ruby rails)
+plugins=(colored-man-pages git rvm rake ruby rails zsh-autosuggestions zsh-256color)
 
 # User configuration
 
-  export PATH="$PATH:/home/kogut/.rvm/gems/ruby-2.2.3/bin:/home/kogut/.rvm/gems/ruby-2.2.3@global/bin:/home/kogut/.rvm/rubies/ruby-2.2.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kogut/.rvm/bin"
+export PATH="$PATH:/home/kogut/.rvm/gems/ruby-2.2.3/bin:/home/kogut/.rvm/gems/ruby-2.2.3@global/bin:/home/kogut/.rvm/rubies/ruby-2.2.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kogut/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
