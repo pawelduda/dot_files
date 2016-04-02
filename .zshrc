@@ -1,11 +1,10 @@
 [[ -s ${HOME}/.rvm/scripts/rvm ]] && source ${HOME}/.rvm/scripts/rvm
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/kogut/.oh-my-zsh
+export ZSH=/home/pawelduda/.oh-my-zsh
 
 # Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
+# Look in ~/.oh-my-zsh/themes/ # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
@@ -51,12 +50,11 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages git rvm rake ruby rails zsh-autosuggestions zsh-256color)
+plugins=(colored-man-pages git rvm rake ruby rails zsh-autosuggestions)
 
 # User configuration
 
-export PATH="$PATH:/home/kogut/.rvm/gems/ruby-2.2.3/bin:/home/kogut/.rvm/gems/ruby-2.2.3@global/bin:/home/kogut/.rvm/rubies/ruby-2.2.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/kogut/.rvm/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$PATH:/home/pawelduda/.rvm/gems/ruby-2.2.3/bin:/home/pawelduda/.rvm/gems/ruby-2.2.3@global/bin:/home/pawelduda/.rvm/rubies/ruby-2.2.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/pawelduda/.rvm/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,12 +83,12 @@ export LANG=en_EN.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Vi-mode settings
-export KEYTIMEOUT=1
-# END Vi-mode settings
-
 PS1="\$(~/.rvm/bin/rvm-prompt) $PS1"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-eval $(thefuck --alias)
-eval $(thefuck --alias kurde)
+
+eval "$(thefuck --alias)"
+eval "$(thefuck --alias kurde)"
+
+source ~/.bin/tmuxinator.zsh
+export TERM="xterm-256color"

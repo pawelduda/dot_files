@@ -7,8 +7,10 @@ let macvim_skip_colorscheme=1
 set nocompatible
 
 "GUI settings
-set gfn=Monaco\ 14
+set gfn=Monaco\ 12
 set guioptions-=T
+set guiheadroom=0
+set guioptions-=e
 
 "Mouse support
 set mouse=a
@@ -23,6 +25,7 @@ set linebreak
 set showbreak=>>>
 set textwidth=120
 set noshowmatch
+
 "No beep or flash
 autocmd VimEnter * set vb t_vb=
 set hidden
@@ -33,9 +36,9 @@ set laststatus=2
 set noswapfile
 
 "Encoding, language
-set langmenu=en_US.UTF-8
-set encoding=utf-8
-set fileencoding=utf-8
+" set langmenu=en_US.UTF-8
+" set encoding=utf-8
+" set fileencoding=utf-8
 
 "Search
 set hlsearch
@@ -46,10 +49,10 @@ set incsearch
 "Indentantion
 set autoindent
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 set smartindent
 set smarttab
-set softtabstop=4
+set softtabstop=2
 
 "Ruler
 set ruler
@@ -58,59 +61,63 @@ set colorcolumn=120
 set undolevels=200
 set backspace=indent,eol,start
 
-syntax on
+call plug#begin('~/.vim/plugged')
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-easytags'
+Plug 'easymotion/vim-easymotion'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim'
+Plug 'NLKNguyen/papercolor-theme'
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'scrooloose/syntastic'
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-easytags'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
-Plugin 'sjl/gundo.vim'
-" Plugin 'altercation/vim-colors-solarized'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'scrooloose/syntastic'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'szw/vim-g'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround'
-Plugin 'bling/vim-airline'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'terryma/vim-expand-region'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'szw/vim-maximizer'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'JazzCore/ctrlp-cmatcher'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'bling/vim-airline'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'szw/vim-maximizer'
+Plug 'lambdalisue/vim-fullscreen'
 
 "Language/tool specific
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-rvm'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'lmeijvogel/vim-yaml-helper'
-Plugin 'isRuslan/vim-es6'
+Plug 'vim-ruby/vim-ruby'
+Plug 'kchmck/vim-coffee-script'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-haml'
+Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rvm'
+Plug 'thoughtbot/vim-rspec'
+Plug 'ngmy/vim-rubocop'
+Plug 'lmeijvogel/vim-yaml-helper'
+Plug 'isRuslan/vim-es6'
+Plug 'mattboehm/vim-unstack'
+Plug 'mattboehm/vim-accordion'
+Plug 'leafgarland/typescript-vim'
+Plug 'mattn/emmet-vim'
 
-call vundle#end()
+"Neovim only
+Plug 'janko-m/vim-test'
+Plug 'kassio/neoterm'
+Plug 'benekastah/neomake'
+call plug#end()
+
 filetype plugin indent on
 
 set background=dark
 set t_Co=256
 colorscheme PaperColor
-" let g:solarized_termtrans=1
-" colorscheme solarized
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -119,7 +126,7 @@ autocmd Filetype haml setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype sass setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 "Map leader to ,
 let mapleader = ","
@@ -127,26 +134,15 @@ let mapleader = ","
 "Use commands like this: ;w instead of :w
 nnoremap ; :
 
-"Bubble single lines (kicks butt)
-"http://vimcasts.org/episodes/bubbling-text/
-nmap <C-j> ddp
-nmap <C-k> ddkP
-
-"Bubble multiple lines
-vmap <C-j> xp`[V`]
-vmap <C-k> xkP`[V`]
-
 "Easymotion
 map <Leader> <Plug>(easymotion-prefix)
 
+"Easytags
 "Async easytags
 let g:easytags_async = 1
-
-"Rspec mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+"Create tags files per working directory
+" let g:easytags_dynamic_files = 2
+" set cpoptions+=d
 
 "CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -166,19 +162,60 @@ if executable('ag')
     let g:ctrlp_use_caching = 0
 endif
 
+"Use custom matcher for ctrlp
+" let g:ctrlp_match_func = { 'match' : 'matcher#cmatch' }
+
 "airline fixes
 set fillchars+=stl:\ ,stlnc:\
 let &t_Co=256
-
-"vim-maximizer
-" let g:maximizer_default_mapping_key = '<F5>'
 
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
-"Gundo mapping
-nnoremap <F5> :GundoToggle<CR>
+let g:syntastic_javascript_checkers = ['standard']"
 
-"YCM speed fixes
-let g:ycm_register_as_syntastic_checker = 0
+"NERDTree shortcut ,2
+nmap <leader>2 <C-n> :NERDTreeToggle<CR>
+
+" Don't screw up folds when inserting text that might affect them, until
+" leaving insert mode. Foldmethod is local to the window. Protect against
+" screwing up folding when switching between windows.
+" Uncomment line below in case of performance issues
+" autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+" autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
+"Gitgutter
+"Uncomment two lines below in case of performance issues
+" let g:gitgutter_realtime = 0
+" let g:gitgutter_eager = 0
+" let g:gitgutter_grep_command = 'ag %s -l --nocolor -g ""'
+
+"I believe these settings (especially re=1) solved slow performance in mvim, I believe
+set nocursorcolumn
+set nocursorline
+set norelativenumber
+syntax sync minlines=256
+set synmaxcol=200
+set re=1
+
+" make test commands execute using dispatch.vim
+let test#strategy = 'neoterm'
+
+"Exit terminal mode with esc
+:tnoremap <Esc> <C-\><C-n>"
+
+"Improve windows navigation by using 'alt + x' combination even when terminal window is active
+:tnoremap <A-h> <C-\><C-n><C-w>h
+:tnoremap <A-j> <C-\><C-n><C-w>j
+:tnoremap <A-k> <C-\><C-n><C-w>k
+:tnoremap <A-l> <C-\><C-n><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-j> <C-w>j
+:nnoremap <A-k> <C-w>k
+:nnoremap <A-l> <C-w>l
+
+"Neomake on save
+autocmd! BufWritePost * Neomake
