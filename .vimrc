@@ -10,8 +10,7 @@ set nocompatible
 set gfn=Monaco\ 12
 set guioptions-=T
 set guiheadroom=0
-set guioptions-=e
-
+set guioptions-=e 
 "Mouse support
 set mouse=a
 
@@ -166,8 +165,17 @@ endif
 " let g:ctrlp_match_func = { 'match' : 'matcher#cmatch' }
 
 "airline fixes
-set fillchars+=stl:\ ,stlnc:\
-let &t_Co=256
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+" unicode symbols
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -201,7 +209,6 @@ syntax sync minlines=256
 set synmaxcol=200
 set re=1
 
-" make test commands execute using dispatch.vim
 let test#strategy = 'neoterm'
 
 "Exit terminal mode with esc
@@ -219,3 +226,8 @@ let test#strategy = 'neoterm'
 
 "Neomake on save
 autocmd! BufWritePost * Neomake
+
+"Unified clipboard
+if has('nvim')
+  set clipboard+=unnamedplus
+endif
