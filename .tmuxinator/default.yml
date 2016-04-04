@@ -1,0 +1,9 @@
+name: default
+root: ~/
+
+windows:
+  - server:
+  - console:
+  - rspec:
+  - rubocop_and_other:
+  - editor: nvim
