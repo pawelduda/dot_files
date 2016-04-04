@@ -5,11 +5,7 @@ pre: sudo service elasticsearch start
 pre_window: rvm use 2.2.4 && rvm gemset use GrantNavigator
 windows:
   - server: bundle exec rails s
-  - logs: tail -f log/development.log
   - console: bundle exec rails c
   - rspec: bundle exec rspec
-  - rubocop: bundle exec rubocop
-  - editor:
-      layout: main-vertical
-      panes:
-        - nvim
+  - rubocop_and_other: bundle exec rubocop
+  - editor: nvim
