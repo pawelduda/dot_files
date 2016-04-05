@@ -6,11 +6,6 @@ let macvim_skip_colorscheme=1
 
 set nocompatible
 
-"GUI settings
-set gfn=Monaco\ 12
-set guioptions-=T
-set guiheadroom=0
-set guioptions-=e 
 "Mouse support
 set mouse=a
 
@@ -33,6 +28,9 @@ set laststatus=2
 
 "Disable swap files creation
 set noswapfile
+
+set splitright
+set splitbelow
 
 "Encoding, language
 " set langmenu=en_US.UTF-8
