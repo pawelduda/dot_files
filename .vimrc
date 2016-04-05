@@ -83,10 +83,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'szw/vim-maximizer'
 Plug 'lambdalisue/vim-fullscreen'
 
-"Language/tool specific
+"Ruby
 Plug 'vim-ruby/vim-ruby'
-Plug 'kchmck/vim-coffee-script'
-Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-haml'
 Plug 'slim-template/vim-slim'
@@ -95,13 +93,19 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rvm'
-Plug 'thoughtbot/vim-rspec'
 Plug 'ngmy/vim-rubocop'
 Plug 'lmeijvogel/vim-yaml-helper'
-Plug 'isRuslan/vim-es6'
 Plug 'mattboehm/vim-unstack'
 Plug 'mattboehm/vim-accordion'
+
+"JS
+Plug 'pangloss/vim-javascript'
+Plug 'isRuslan/vim-es6'
+Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
+Plug 'mxw/vim-jsx'
+
+"HTML
 Plug 'mattn/emmet-vim'
 
 "Neovim only
@@ -178,8 +182,6 @@ let g:airline_symbols.whitespace = 'Ξ'
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
-
-let g:syntastic_javascript_checkers = ['standard']"
 
 "NERDTree shortcut ,2
 nmap <leader>2 <C-n> :NERDTreeToggle<CR>
