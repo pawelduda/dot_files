@@ -1,26 +1,30 @@
 set shell=/bin/bash
 
+set title
+
 "Removed in Neovim, keeping this for backwards compatibility
 set ttyfast
 set nocompatible
 
-"Show commands as they are entered
-set showcmd
-
 "Scroll horizontally by 1 character instead of default half screen
 set sidescroll=1
+"Always show at least 1 line above/below the cursor while scrolling
+set scrolloff=1
 
+"Move vertically by rows rather than lines (useful with long lines + wrap on)
+nnoremap j gj
+nnoremap k gk
+
+"Remove startup message set shortmess+=I
 "Mouse support
 set mouse=a
-
-"Only redraw when we need it
-set lazyredraw
 
 set timeoutlen=1000 ttimeoutlen=0
 
 "Show absolute line number directly to the left of current cursor's position and relative numbers elsewhere (awesome!)
 set number
-set relativenumber
+" set relativenumber
+set norelativenumber
 
 set linebreak
 set nowrap
@@ -49,6 +53,7 @@ set splitbelow
 "Search:
 "Highlight search matches
 set hlsearch
+set ignorecase
 "Override the 'ignorecase' option if the search pattern contains upper case characters.
 set smartcase
 "Search as you type
@@ -82,9 +87,12 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-easytags'
 Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
-Plug 'sjl/gundo.vim'
-Plug 'NLKNguyen/papercolor-theme'
+" Plug 'NLKNguyen/papercolor-theme'
 Plug 'tpope/vim-surround'
+Plug 'mhartington/oceanic-next'
+Plug 'sheerun/vim-polyglot'
+" Plug 'morhetz/gruvbox'
+" Plug 'Yggdroot/indentLine'
 
 "Git integration:
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -103,10 +111,18 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'JazzCore/ctrlp-cmatcher'
 
 "Autocomplete, snippets
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer --tern-completer' }
+" Plug 'ervandew/supertab'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neoinclude.vim'
+Plug 'awetzel/elixir.nvim'
+Plug 'carlitux/deoplete-ternjs'
+Plug 'fishbullet/deoplete-ruby'
+Plug 'Shougo/context_filetype.vim'
+Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/neoinclude.vim'
 
 "Comments:
 Plug 'tpope/vim-commentary'
@@ -118,35 +134,35 @@ Plug 'szw/vim-maximizer'
 Plug 'godlygeek/tabular'
 
 "Ruby
-Plug 'vim-ruby/vim-ruby'
+" Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rvm'
-Plug 'ngmy/vim-rubocop'
+" Plug 'tpope/vim-rvm'
+" Plug 'ngmy/vim-rubocop'
 
-Plug 'mattboehm/vim-unstack'
-Plug 'mattboehm/vim-accordion'
+" Plug 'mattboehm/vim-unstack'
+" Plug 'mattboehm/vim-accordion'
 
 "Rails
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-rake'
+" Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-rake'
 
 "Yaml
 Plug 'lmeijvogel/vim-yaml-helper'
 
 "Haml
-Plug 'tpope/vim-haml'
+" Plug 'tpope/vim-haml'
 
 "Slim
-Plug 'slim-template/vim-slim'
+" Plug 'slim-template/vim-slim'
 
 "JS
-Plug 'pangloss/vim-javascript'
-Plug 'isRuslan/vim-es6'
-Plug 'kchmck/vim-coffee-script'
-Plug 'mxw/vim-jsx'
-" Plug 'othree/yajs.vim'
+" Plug 'pangloss/vim-javascript'
+" Plug 'isRuslan/vim-es6'
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'mxw/vim-jsx'
+Plug 'othree/yajs.vim'
 
 "TypeScript
 " Plug 'Shougo/vimproc.vim' "Async execution library, required by tsuquyomi
@@ -165,15 +181,28 @@ Plug 'benekastah/neomake'
 Plug 'shime/vim-livedown'
 
 "Rust
-Plug 'rust-lang/rust.vim'
+" Plug 'rust-lang/rust.vim'
+
+"Elixir
+" Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+Plug 'vimwiki/vimwiki'
 call plug#end()
+
+" let g:elixir_docpreview = 1
+" let g:elixir_showerror = 1
+" let g:elixir_autobuild = 1
+let g:syntastic_enable_elixir_checker = 1
 
 filetype plugin indent on
 
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+if (has("termguicolors"))
+ set termguicolors
+endif
 syntax enable
-colorscheme PaperColor
 set background=dark
-let g:airline_theme='papercolor'
+colorscheme OceanicNext
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -195,6 +224,18 @@ nnoremap ; :
 
 "Easymotion
 map <Leader> <Plug>(easymotion-prefix)
+" Require tpope/vim-repeat to enable dot repeat support
+" Jump to anywhere with only `s{char}{target}`
+" `s<CR>` repeat last find motion.
+nmap s <Plug>(easymotion-s)
+" Bidirectional & within line 't' motion
+" omap t <Plug>(easymotion-bd-tl)
+" Use uppercase target labels and type as a lower case
+let g:EasyMotion_use_upper = 1
+ " type `l` and match `l`&`L`
+let g:EasyMotion_smartcase = 1
+" Smartsign (type `3` and match `3`&`#`)
+let g:EasyMotion_use_smartsign_us = 1
 
 "Easytags
 "Async easytags
@@ -224,18 +265,23 @@ endif
 "Use custom matcher for ctrlp
 " let g:ctrlp_match_func = { 'match' : 'matcher#cmatch' }
 
+"" air-line
+let g:airline_powerline_fonts = 1
+
+
 "airline fixes
+let g:airline_theme='oceanicnext'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
-" unicode symbols
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -244,8 +290,8 @@ nnoremap \ :Ag<SPACE>
 "NERDTree shortcut ,2
 nnoremap <leader>2 <C-n> :NERDTreeToggle<CR>
 "Autostart NERDTree
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+" autocmd VimEnter * NERDTree
+" autocmd VimEnter * wincmd p
 
 " Don't screw up folds when inserting text that might affect them, until
 " leaving insert mode. Foldmethod is local to the window. Protect against
@@ -268,7 +314,7 @@ let g:gitgutter_sign_column_always = 1
 set nocursorcolumn
 set nocursorline
 syntax sync minlines=256
-set synmaxcol=200
+set synmaxcol=400
 set re=1
 
 let test#strategy = 'neoterm'
@@ -304,19 +350,28 @@ autocmd BufWritePre * FixWhitespace
 set autoread
 au CursorHold * checktime
 
-"Rust ycm config
-let g:ycm_rust_src_path="/home/pawelduda/Developer/rust-master/src"
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 " makeYCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<C-e>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsExpandTrigger = "<C-e>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "Python
 let g:syntastic_python_checkers = []
+"
+" Tab completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
+" Center screen on next/previous selection.
+nnoremap n nzz
+nnoremap N Nzz
+" Last and next jump should center too.
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz
